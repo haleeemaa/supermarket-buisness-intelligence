@@ -293,7 +293,7 @@ if page == "Overview":
         "Total Revenue",
         f"£{summary['total_revenue']:,.2f}"
     )
-
+    st.caption(f"Full revenue: £{summary['total_revenue']:,.2f}")
     col2.metric(
         "Total Orders",
         f"{summary['total_orders']:,}"
@@ -375,7 +375,7 @@ elif page == "Sales Analysis":
         "Total Revenue",
         f"£{summary['total_revenue']:,.2f}"
     )
-
+    st.caption(f"Full revenue: £{summary['total_revenue']:,.2f}")
     col2.metric(
         "Average Order Value",
         f"£{summary['average_order_value']:,.2f}"
