@@ -55,7 +55,7 @@ def create_strategy_report(rules):
                 "than would be expected from their individual popularity."
             )
 
-        elif confidence >= 0.40:
+            """elif confidence >= 0.40:
 
             strategy = "Product Placement"
 
@@ -67,7 +67,7 @@ def create_strategy_report(rules):
             reason = (
                 "Customers buying the first product show a useful tendency "
                 "to purchase the recommended product as well."
-            )
+            )"""
 
         else:
 

@@ -293,7 +293,11 @@ if page == "Overview":
         "Total Revenue",
         f"£{summary['total_revenue']:,.2f}"
     )
-    st.caption(f"Full revenue: £{summary['total_revenue']:,.2f}")
+
+    st.caption(
+        f"Full revenue: £{summary['total_revenue']:,.2f}"
+    )
+
     col2.metric(
         "Total Orders",
         f"{summary['total_orders']:,}"
@@ -375,7 +379,11 @@ elif page == "Sales Analysis":
         "Total Revenue",
         f"£{summary['total_revenue']:,.2f}"
     )
-    st.caption(f"Full revenue: £{summary['total_revenue']:,.2f}")
+
+    st.caption(
+        f"Full revenue: £{summary['total_revenue']:,.2f}"
+    )
+
     col2.metric(
         "Average Order Value",
         f"£{summary['average_order_value']:,.2f}"
@@ -393,6 +401,7 @@ elif page == "Sales Analysis":
     monthly = get_monthly_sales(filtered_df)
 
     if not monthly.empty:
+
         st.line_chart(
             monthly.set_index("Month")["Revenue"]
         )
@@ -408,6 +417,7 @@ elif page == "Sales Analysis":
         daily = get_daily_sales(filtered_df)
 
         if not daily.empty:
+
             st.bar_chart(
                 daily.set_index("Day")["Revenue"]
             )
@@ -417,6 +427,7 @@ elif page == "Sales Analysis":
         st.subheader("Orders by Day of Week")
 
         if not daily.empty:
+
             st.bar_chart(
                 daily.set_index("Day")["Orders"]
             )
@@ -569,7 +580,9 @@ elif page == "Products Bought Together":
 
                 if basket.empty:
 
-                    st.warning("No shopping baskets could be created.")
+                    st.warning(
+                        "No shopping baskets could be created."
+                    )
 
                 else:
 
@@ -591,7 +604,9 @@ elif page == "Products Bought Together":
                         # Frequently purchased combinations
                         combinations = format_combinations(itemsets)
 
-                        st.subheader("Frequently Purchased Combinations")
+                        st.subheader(
+                            "Frequently Purchased Combinations"
+                        )
 
                         if combinations.empty:
 
@@ -602,8 +617,9 @@ elif page == "Products Bought Together":
 
                         else:
 
-                            # IMPORTANT: Column name is Support, not support
-                            combinations["Orders containing combination (%)"] = (
+                            combinations[
+                                "Orders containing combination (%)"
+                            ] = (
                                 combinations["Support"] * 100
                             ).round(2)
 
@@ -637,7 +653,9 @@ elif page == "Products Bought Together":
 
                         st.divider()
 
-                        st.subheader("Product Recommendations")
+                        st.subheader(
+                            "Product Recommendations"
+                        )
 
                         if rules.empty:
 
@@ -652,12 +670,15 @@ elif page == "Products Bought Together":
 
                             display_rules = formatted_rules.copy()
 
-                            # IMPORTANT: Use the actual capitalised column names
-                            display_rules["Orders containing both (%)"] = (
+                            display_rules[
+                                "Orders containing both (%)"
+                            ] = (
                                 display_rules["Support"] * 100
                             ).round(2)
 
-                            display_rules["Buying likelihood (%)"] = (
+                            display_rules[
+                                "Buying likelihood (%)"
+                            ] = (
                                 display_rules["Confidence"] * 100
                             ).round(2)
 
@@ -686,7 +707,9 @@ elif page == "Products Bought Together":
                                 "text/csv"
                             )
 
-                        with st.expander("Understand these results"):
+                        with st.expander(
+                            "Understand these results"
+                        ):
 
                             st.markdown("""
                             **Support:** The proportion of all analysed
@@ -769,7 +792,9 @@ elif page == "Business Suggestions":
         type="primary"
     ):
 
-        with st.spinner("Generating business suggestions..."):
+        with st.spinner(
+            "Generating business suggestions..."
+        ):
 
             try:
 
@@ -808,7 +833,13 @@ elif page == "Business Suggestions":
                         recommendations
                     )
 
-                    st.subheader("Business Opportunity Overview")
+                    st.subheader(
+                        "Business Opportunity Overview"
+                    )
+
+                    # ==========================================
+                    # UPDATED METRICS
+                    # ==========================================
 
                     col1, col2, col3, col4 = st.columns(4)
 
@@ -828,13 +859,15 @@ elif page == "Business Suggestions":
                     )
 
                     col4.metric(
-                        "Product Placement",
-                        strategy_summary["product_placement"]
+                        "Product Recommendations",
+                        strategy_summary["other_recommendations"]
                     )
 
                     st.divider()
 
-                    st.subheader("Recommended Business Actions")
+                    st.subheader(
+                        "Recommended Business Actions"
+                    )
 
                     for index, item in enumerate(
                         recommendations,
@@ -883,7 +916,9 @@ elif page == "Business Suggestions":
                                 item["Lift"]
                             )
 
-                    report = pd.DataFrame(recommendations)
+                    report = pd.DataFrame(
+                        recommendations
+                    )
 
                     report_csv = report.to_csv(
                         index=False
